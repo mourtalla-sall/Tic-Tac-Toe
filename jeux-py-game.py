@@ -6,7 +6,7 @@ pygame.init()
 WIDTH, HEIGHT = 600, 600
 TAILLE_CASE = WIDTH // 3
 BLANC = (255, 255, 255)
-NOIR = (0, 0, 0)
+BLACK = (0, 0, 0)
 
 screen = pygame.display.set_mode((WIDTH, HEIGHT))
 pygame.display.set_caption('TIC TAC TOE')
@@ -18,14 +18,14 @@ board = [case_vide for _ in range(9)]
 jeu_termine = False
 gagnant = None
 
-# --- Fonction d'affichage du plateau ---
+#Fonction d'affichage du plateau ---
 def affichage_Tableaux():
     screen.fill(BLANC)
 
 # Dessiner la grille
     for i in range(1, 3):
-        pygame.draw.line(screen, NOIR, (i * TAILLE_CASE, 0), (i * TAILLE_CASE, HEIGHT), 4)
-        pygame.draw.line(screen, NOIR, (0, i * TAILLE_CASE), (WIDTH, i * TAILLE_CASE), 4)
+        pygame.draw.line(screen, BLACK, (i * TAILLE_CASE, 0), (i * TAILLE_CASE, HEIGHT), 4)
+        pygame.draw.line(screen, BLACK, (0, i * TAILLE_CASE), (WIDTH, i * TAILLE_CASE), 4)
 
 
 # Afficher les symboles et le taille 
@@ -35,13 +35,13 @@ def affichage_Tableaux():
         if symbole != case_vide:
             x = (i % 3) * TAILLE_CASE + 70
             y = (i // 3) * TAILLE_CASE + 30
-            texte = font.render(symbole, True, NOIR)
+            texte = font.render(symbole, True, BLACK)
             screen.blit(texte, (x, y))
 
 # Si le jeu est terminé → afficher le gagnant
     if jeu_termine:
         afficher_gagnant(gagnant)
-
+# pour mettre à jour 
     pygame.display.flip()
 
 # Vérifier les condition pour gagner
@@ -65,7 +65,7 @@ def afficher_gagnant(gagnant):
         message = "Match nul !"
     else:
         message = f"Le joueur {gagnant} gagne la partie !"
-    texte = font.render(message, True, NOIR)
+    texte = font.render(message, True, BLACK)
     rect = texte.get_rect(center=(WIDTH // 2, HEIGHT // 2))
     screen.blit(texte, rect)
 

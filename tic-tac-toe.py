@@ -16,6 +16,20 @@ def affichage_Tableaux():
          print(" ---+---+---")
 
 
+# définir comment doit etre les ligne  pour qu'un le joureur gagne
+def verifier_victoire():
+    return (
+        case_vide != board[0] == board[1] == board[2] or
+        case_vide != board[3] == board[4] == board[5] or
+        case_vide != board[6] == board[7] == board[8] or
+        case_vide != board[0] == board[3] == board[6] or
+        case_vide != board[1] == board[4] == board[7] or
+        case_vide != board[2] == board[5] == board[8] or
+        case_vide != board[0] == board[4] == board[8] or
+        case_vide != board[2] == board[4] == board[6]
+    )
+
+
 # définir le boucle While pour avoir un boucle répétitif   
 while True:
 
@@ -24,20 +38,20 @@ while True:
     choix_joueur = 0
 
 # définir boucle while pour conditionner aux utilisateurs sur les valeur à mettre  
-    while choix_joueur < 1 or choix_joueur > 9 or board[choix_joueur -1] != case_vide:
-        choix_joueur = int(input("Donnez une case entre 0 à 9 :"))
+    while True:
+        try:
+            choix_joueur = int(input("Donnez une case entre 1 et 9 : "))
+            if 1 <= choix_joueur <= 9 and board[choix_joueur - 1] == case_vide:
+                break
+            else:
+                print("Case invalide ou déjà prise, réessayez.")
+        except:
+            print("Veuillez entrer un nombre entre 1 et 9.")
 
     board[choix_joueur -1] = joueur
 
-# définir comment doit etre les ligne  pour qu'un le joureur gagne
-    if  case_vide != board[0] ==  board[1] ==  board[2] \
-    or  case_vide != board[3] ==  board[4] ==  board[5] \
-    or  case_vide != board[6] ==  board[7] ==  board[8]  \
-    or  case_vide != board[0] ==  board[3] ==  board[6]  \
-    or  case_vide != board[1] ==  board[4] ==  board[7]  \
-    or  case_vide != board[2] ==  board[5] ==  board[8]  \
-    or  case_vide != board[0] ==  board[4] ==  board[8]  \
-    or  case_vide != board[2] ==  board[4] ==  board[6]  : 
+# appel la fonction qui vérifie qu'un joureur gagne
+    if verifier_victoire():
         print(f"le joueur {joueur} a gagné la partis !")
         affichage_Tableaux()
         break
